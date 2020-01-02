@@ -3,7 +3,7 @@ layout:     post
 title:      可视化管理 MongoDB Atlas
 date:       2018-05-05 16:19:17
 author:     HYJ
-header-img: img/tag-bg-o.jpg
+header-img: img/default.jpg
 catalog: true
 tags:
     - MongoDB

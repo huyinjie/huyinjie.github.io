@@ -1,12 +1,16 @@
----
-title: 树莓派安装homeassistant和Homebridge
-date: 2018-03-04 19:25:27
-notag: true
----
+layout:     post
+title:      树莓派安装homeassistant和Homebridge
+date:       2018-03-04 19:25:27
+author:     HYJ
+header-img: img/default.jpg
+catalog: true
+tags:
+    - 树莓派
+
  <!-- more --> 
 
 
-### 安装Python3并更换镜像源
+# 安装Python3并更换镜像源
 1. `sudo apt-get install python3-pip python3-venv`
 2. 编辑 `~/.pip/pip.conf` 文件，用以下内容取代：
    ```
@@ -15,7 +19,7 @@ notag: true
    ```
 > 注:应先创建`.pip`文件夹及`pip.conf`
 
-### 安装Homeassistant
+# 安装Homeassistant
 1. `cd /home/pi/Desktop && python3 -m venv homeassistant`
 2. `cd homeassistant`
 3. `source bin/activate`
@@ -25,7 +29,7 @@ notag: true
 > 若出现 `Error while setting up platform xiaomi_miio` 请执行 `pip3 install construct==2.8.21`
 > 目前米家插件 `miio` 支持0.61.0和0.62.3这两个版本
 
-### 设置homeassistant开机启动
+# 设置homeassistant开机启动
 1. 创建 `home-assistant@pi.service` ,并放入以下内容 
    `sudo vim /etc/systemd/system/home-assistant@pi.service`
    ```bash
@@ -54,7 +58,7 @@ sudo systemctl restart home-assistant@pi.service
 sudo systemctl status home-assistant@pi.service
 ```
 
-### 安装Homebridge
+# 安装Homebridge
 1. `sudo apt-get install gcc`
 2. 安装nodejs 
    ```bash
@@ -67,7 +71,7 @@ sudo systemctl status home-assistant@pi.service
 5. `sudo npm install -g --unsafe-perm homebridge-homeassistant`
    ![](https://user-gold-cdn.xitu.io/2018/2/3/16159cc12e215b06?w=1033&h=876&f=png&s=177555)
 
-### Homebridge配置
+# Homebridge配置
 1. 在终端中输入
    ```bash
    mkdir ~/.homebridge
@@ -106,9 +110,9 @@ sudo systemctl status home-assistant@pi.service
 
 ![](https://user-gold-cdn.xitu.io/2018/2/3/16159ed69446f903?w=1442&h=876&f=png&s=167151)
 
-### 设置Homebridge开机启动
+# 设置Homebridge开机启动
 1. 创建 `homebridge@pi.service` ,并放入以下内容 
-  `sudo vim /etc/systemd/system/homebridge@pi.service`
+    `sudo vim /etc/systemd/system/homebridge@pi.service`
   ```
   [Unit]
   Description=Homebridge
@@ -136,13 +140,13 @@ sudo systemctl status home-assistant@pi.service
   sudo systemctl status homebridge@pi.service
   ```
 
-#### 如何更新Hhomeassistant
+## 如何更新Hhomeassistant
 1. 切换至虚拟环境 `cd /home/pi/Desktop/homeassistant && source bin/activate`
 2. 升级系统 `pip3 install --upgrade homeassistant`
 
 
 
-#### 参考资料
+# 参考资料
 
 * 官方安装指南 [https://home-assistant.io/docs/installation/virtualenv/](https://home-assistant.io/docs/installation/virtualenv/)
 * Github上Error while setting up platform xiaomi_miio的解决办法 [https://github.com/home-assistant/home-assistant/issues/11768](https://github.com/home-assistant/home-assistant/issues/11768)

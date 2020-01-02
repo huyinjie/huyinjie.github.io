@@ -3,7 +3,7 @@ layout:     post
 title:      利用Proxychains-ng和Privoxy实现多种代理
 date:       2018-03-12 20:11:18
 author:     HYJ
-header-img: img/tag-bg-o.jpg
+header-img: img/default.jpg
 catalog: true
 tags:
     - Proxy
