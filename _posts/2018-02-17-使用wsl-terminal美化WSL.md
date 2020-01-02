@@ -1,23 +1,26 @@
 ---
-title: 使用wsl-terminal美化WSL
-date: 2018/2/17
-updated: 2018/2/17
-notag: true	
-tags: Windows
+layout:     post
+title:      树莓派安装homeassistant和Homebridge
+date:       2018-02-17 20:00:00
+author:     HYJ
+header-img: img/default.jpg
+catalog: true
+tags:
+    - WSL
 ---
 
 
 本文基于Windows10 1709更新后在Windows Store安装的Bash
  <!-- more --> 
 
-#### 下载安装`wsl-terminal`
+# 下载安装`wsl-terminal`
 `wsl-terminal`是一个[Github](https://github.com/goreliu/wsl-terminal)上的一个基于`mintty`和`wslbridge`的WSL模拟器
 
 1. [下载](https://github.com/goreliu/wsl-terminal/releases) wsl-terminal
 2. 解压后运行目录下的`open-wsl.exe` 
 3. 运行`tools`目录下的`1-add-open-wsl-terminal-here-menu.js` ，注意当前该脚本需要有完全控制System的权限
 
-#### 安装Zsh和oh-my-zsh
+# 安装Zsh和oh-my-zsh
 
 1. 安装Zsh
 
@@ -50,7 +53,7 @@ tags: Windows
 
    ​
 
-#### 修改颜色及主题
+# 修改颜色及主题
 
 1. 用`vim`打开`.zshrc`  , 将主题修改为`agnoster ` ，重启终端
 
@@ -70,6 +73,6 @@ tags: Windows
 
 
 
-##### 参考资料
+## 参考资料
 
 * https://medium.com/@Andreas_cmj/how-to-setup-a-nice-looking-terminal-with-wsl-in-windows-10-creators-update-2b468ed7c326
