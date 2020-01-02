@@ -1,3 +1,4 @@
+---
 layout:     post
 title:      树莓派安装homeassistant和Homebridge
 date:       2018-03-04 19:25:27
@@ -6,7 +7,7 @@ header-img: img/default.jpg
 catalog: true
 tags:
     - 树莓派
-
+---
  <!-- more --> 
 
 
