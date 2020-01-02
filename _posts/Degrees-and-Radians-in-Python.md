@@ -1,0 +1,111 @@
+---
+title: Degrees and Radians in Python
+mathjax: true
+tags:
+  - Python
+  - Math
+  - Geography
+date: 2018-06-14 17:22:01
+---
+
+<!-- TOC -->
+
+- [Degree (angle) 角度](#degree-angle-角度)
+    - [角度的十进制表示与DMS间的转换](#角度的十进制表示与dms间的转换)
+- [Radian 弧度](#radian-弧度)
+    - [圆的弧长](#圆的弧长)
+- [弧度与角度间的转换](#弧度与角度间的转换)
+- [地里中的使用](#地里中的使用)
+- [Calculate in Python](#calculate-in-python)
+- [参考资料](#参考资料)
+
+<!-- /TOC -->
+
+在Python官方文档中的 *[Angular conversion](https://docs.python.org/3/library/math.html#angular-conversion)* 一节介绍了了 `math.degrees(x)` 和 `math.radians(x)` 两个方法。本文基于这两种方法，具体讨论了Python中 弧度--度数 转换的方法。
+ <!-- more --> 
+`math.degrees(x)` 将角度x从弧度转换为度数，`math.radians(x)` 将角度x从度数转换为弧度。  
+
+在Python中 `math.pi` 可视为 π 。
+
+
+
+#### Degree (angle) 角度
+
+角度（又称为度）通常以度数符号**°** 来表示。是平面角的度量，一个完整的旋转(a full rotation)是360**°** ，
+
+它不是国际单位(*[SI unit](https://en.wikipedia.org/wiki/SI_unit)*)，因为角度测量的国际单位是弧度，但是国际单位手册中被提及的可接受的单位。
+
+如果不是用于天文学或地理坐标（如经纬度），角度可用十进制表示，度数符号写在值的后面，如40.1875° 
+
+若用于地理坐标，则使用传统的六十进制细分。1弧度被分为60分（弧度单位），1分被分为60秒（弧度单位） ，degrees-minutes-seconds的表示法也被称为DMS符号，这里的分、秒也称为*[arcminute](https://en.wikipedia.org/wiki/Arcminute)*和*[arcsecond](https://en.wikipedia.org/wiki/Arcsecond)* 。此时 40.1875° = 40° 11′ 15″  ，用*[引号字符](https://en.wikipedia.org/wiki/Quotation_mark)*则表示为40° 11' 15" 
+
+##### 角度的十进制表示与DMS间的转换
+
+将十进制角度转换为DMS（在线转换器: [Decimal Degrees to DMS conversion](https://www.rapidtables.com/convert/number/degrees-to-degrees-minutes-seconds.html)）
+
+```mathematica
+1°=60′=3600〃
+85.231°= 85°13'51.6''
+0.231*60=13.86 13' 0.86*60=51.6
+86°23′10〃=86+23/60+10/3600=86.386
+```
+
+将DMS转换为十进制角度（在线转换器: [DMS to decimal degrees converter](https://www.rapidtables.com/convert/number/degrees-minutes-seconds-to-degrees.html)）
+
+```mathematica
+1° = 60' = 3600"
+1' = (1/60)° = 0.01666667°
+1" = (1/3600)° = 2.77778e-4° = 0.000277778°
+```
+
+#### Radian 弧度
+
+单位弧度定义为**圆弧长度等于半径时的圆心角**，记为rad，是一个国际单位(*[SI unit](https://en.wikipedia.org/wiki/SI_unit)*)，书写时rad通常可省略
+
+$2\pi\ rad=360^{\circ }$ ==>  $1\ rad = \frac{360^{\circ }}{2\pi}$
+
+
+
+##### 圆的弧长
+圆的弧长与角度（弧度）成正比。设圆的半径为 r，那么弧度 $\alpha$ 对应的圆弧的弧长是 $r\alpha$  
+角度 $θ$ 对应的圆弧的弧长是 $\frac{r\pi\theta}{180}$ ；整个圆周的周长是： $C=2\pi r$  
+特别的，当圆心角使用弧度制单位时，弧长 = 弧度制圆心角*半径。
+
+#### 弧度与角度间的转换
+
+* 弧度转换为角度（在线转换器: [Radians to Degrees conversion calculator](https://www.rapidtables.com/convert/number/radians-to-degrees.html)）
+    $angle\  in\ degrees = angle\ in\ radians *  \frac{180^{\circ }}{\pi}$
+
+* 角度转换为弧度（在线转换器: [Degrees to Radians conversion calculator](https://www.rapidtables.com/convert/number/degrees-to-radians.html)）
+    $angle\ in\ radians= angle\ in\ degrees*  \frac{\pi}{180^{\circ }}$
+
+#### 地里中的使用
+[Convert Latitude/Longitude to Decima](https://andrew.hedges.name/experiments/convert_lat_long/) 该网站提供了一个十进制格式和度/分/秒（DMS）格式之间转换纬度和经度信息的工具
+
+#### Calculate in Python 
+
+- 弧度转换为角度 `math.degrees(x)` ，返回一个浮点数，省略度数符号
+  ```python
+  >>> math.degrees(math.pi/4)
+  45.0
+  >>> math.degrees(math.pi/34)
+  5.294117647058823
+  >>> math.degrees(2*math.pi/5) - math.degrees(math.pi/4)
+  27.0
+  ```
+
+  
+
+- 角度转换为弧度 `math.radians(x)` ，返回一个浮点数，省略rad
+  ```python
+  >>> math.radians(37.3764)
+  0.6523412425424086
+  ```
+
+  
+
+
+
+#### 参考资料
+* [Degree (angle) - Wikipedia](https://en.wikipedia.org/wiki/Degree_(angle))
+* [Radian - Wikipedia](https://en.wikipedia.org/wiki/Radian)

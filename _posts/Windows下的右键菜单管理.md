@@ -1,0 +1,352 @@
+---
+title: Windows下的右键菜单管理
+date: 2017/12/7 
+updated: 2017/12/7 
+notag: true	
+tags: Windows
+---
+
+在Windows中安装很多软件时，鼠标的右键菜单中会被各种软件塞满很多没用的选项。本文主要讲述了在安装了Visual Studio 2017、MPC-HC、WSL等软件后的右键菜单管理。
+ <!-- more --> 
+
+>⚠️注：操作前请自行备份注册表
+
+<!-- TOC -->
+
+- [探析注册表📝](#探析注册表📝)
+    - [如何打开注册表📝（Regedit）](#如何打开注册表📝regedit)
+    - [移除'Shell'目录中的项](#移除shell目录中的项)
+        - [隐藏选项（移除VLC的右键菜单为例）](#隐藏选项移除vlc的右键菜单为例)
+        - [移动到`Extended Context Menu`(Shift+鼠标右键所显示的菜单)](#移动到extended-context-menushift鼠标右键所显示的菜单)
+    - [移除`Shellex ` 目录中的项（以"Move to Dropbox"为例）](#移除shellex--目录中的项以move-to-dropbox为例)
+    - [通过文件类型探索其他目录](#通过文件类型探索其他目录)
+    - [修改顺序](#修改顺序)
+- [将WSL添加到右键菜单](#将wsl添加到右键菜单)
+- [管理“在Visual Studio中打开”](#管理在visual-studio中打开)
+    - [临时隐藏“在Visual Studio中打开”（推荐）](#临时隐藏在visual-studio中打开推荐)
+            - [直接移除“在Visual Studio中打开”](#直接移除在visual-studio中打开)
+                - [将“在Visual Studio中打开”移动到Extended Context Menu](#将在visual-studio中打开移动到extended-context-menu)
+- [管理右键“CMD”](#管理右键cmd)
+    - [永久隐藏鼠标右键下的“CMD”](#永久隐藏鼠标右键下的cmd)
+- [关于Windows Media Player](#关于windows-media-player)
+    - [移除“添加到 Windows Media Player 列表”](#移除添加到-windows-media-player-列表)
+    - [移除“使用 Windows Media Player 播放”](#移除使用-windows-media-player-播放)
+- [移除“Add to MPC-HC Playlist”和“Play with MPC-HC”](#移除add-to-mpc-hc-playlist和play-with-mpc-hc)
+- [关于Powershell](#关于powershell)
+    - [删除Extended Context Menu下的Powershell](#删除extended-context-menu下的powershell)
+        - [增强版的CMD,Powershell和Git右键菜单](#增强版的cmdpowershell和git右键菜单)
+- [删除“使用Windows Defender扫描”](#删除使用windows-defender扫描)
+- [删除“共享”](#删除共享)
+- [删除“🐧通过QQ发送到”](#删除🐧通过qq发送到)
+- [参考资料](#参考资料)
+
+<!-- /TOC -->
+
+## 探析注册表📝
+不幸的是，Windwos下的右键菜单由注册表中的多个目录管理。一般而言，这三个目录是
+
+>HKEY_CLASSES_ROOT\\\*\shell
+>HKEY_CLASSES_ROOT\\\*\shellex\ContextMenuHandlers
+>HKEY_CLASSES_ROOT\AllFileSystemObjects\ShellEx
+
+在 __文件夹上按住鼠标右键__ 所显示的菜单由注册表中的以下两个目录管理
+
+>HKEY_CLASSES_ROOT\Directory\shell
+>HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers
+
+在 __文件夹空白处按住鼠标右键__ 所显示的菜单由注册表中的以下目录管理
+
+>HKEY_CLASSES_ROOT\Directory\Background\shell
+
+### 如何打开注册表📝（Regedit）
+1. 在Windows 10: 打开开始菜单，直接输入regedit，回车
+2. 在Windows 7:  按住WIN+R，输入regedit，回车
+
+### 移除'Shell'目录中的项
+这里以移除VLC的右键菜单为例，当鼠标在一个文件夹上右键时，会出现"Add to VLC media player's Playlist"和"Play with VLC media player", 以下是一种隐藏的办法。这种方法同样适用于移除 **Git Bash Here** 和 **Git GUI** 。
+
+#### 隐藏选项（移除VLC的右键菜单为例）
+
+ 🎉 该方法也适用于 `HKEY_CLASSES_ROOT\Directory\Background\shell` (文件夹空白处按住鼠标右键)
+
+在以下两个注册表目录下 __新建一个名为`LegacyDisable`的 字符串 值__
+
+>HKEY_CLASSES_ROOT\Directory\shell\AddtoPlaylistVLC
+>HKEY_CLASSES_ROOT\Directory\shell\PlayWithVLC
+
+<details>
+  <summary>Remove_Shell_VLC</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows下的右键菜单管理/Remove_Shell_VLC.gif" alt = "Remove_Shell_VLC" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">Remove_Shell_VLC</p>
+</details>
+
+<!-- 注意：图片地址要使用 ../../*.png这样 -->
+<!-- ![Remove_Shell_VLC](/Windows下的右键菜单管理/4.gif) -->
+
+
+#### 移动到`Extended Context Menu`(Shift+鼠标右键所显示的菜单)
+
+在上文提到的两个注册表目录下 __新建一个名为`Extended`的字符串值__
+
+>⚠️注：当`Extended`和`LegacyDisable`这两个字符串值同时存在于一个目录中时，`LegacyDisable`会覆盖掉`Extended`，也就是普通菜单和Shift扩展菜单都不显示这个选项。
+
+
+### 移除`Shellex ` 目录中的项（以"Move to Dropbox"为例）
+在Shellx目录下的菜单只能删除或禁用它，而不能像shell一样只将其移动到Extended Context Menu.因此，在shell目录下使用添加`LegacyDisable`或`Extended`字符串来临时隐藏它的技巧是不被允许的。
+`Shellx`目录下的项名有时很难判断它是指向哪个软件，这里以Dropbox安装后留下的"Move to Dropbox"为例
+在DropboxExt目录下将字符串值为(Default)的数值数据前加一些 __英文破折号`-`__ 这样可以既不破坏原有数据，又能在想要在菜单中重新显示它时快速恢复。
+
+<details>
+  <summary>Remove_Shellx_Dropbox</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows下的右键菜单管理/Remove_Shellx_Dropbox.png" alt = "Remove_Shellx_Dropbox" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">Remove_Shellx_Dropbox</p>
+</details>
+
+### 通过文件类型探索其他目录
+部分软件只有在右键单击特定的文件才会显示出。删除的方法和上文提到的`shell`能使用的两种技巧一致，在此不做赘述。
+
+
+
+### 修改顺序
+
+Windows默认安装名称来对菜单上下位置排序。在不使用第三方应用的情况下，只能通过修改注册表项目名称来修改项目在上下文菜单中的位置。
+
+* https://superuser.com/questions/17543/rearrange-reduce-windows-context-menu
+* https://superuser.com/questions/891826/how-to-change-the-order-of-send-to-menu-items-on-windows-7
+* https://www.lopesoft.com/index.php/en/
+
+
+## 将WSL添加到右键菜单
+>WSL是Windows10的一个子系统，提供了一个Linux的虚拟环境，通过将WSL添加到鼠标右键菜单可以实现类似于Linux桌面环境下的'Open Terminal Here'功能。将WSL添加到右键菜单后，在目录空白处 (此教程不适用于文件夹上右键菜单打开) 可直接打开Bash定位到当前目录。
+
+>注：本文基于在[Windows Store](https://www.microsoft.com/zh-CN/store/p/ubuntu/9nblggh4msv6?rtc=1)中安装的Ubuntu，详细安装指南请参考[MSDN](https://docs.microsoft.com/zh-cn/windows/wsl/install-win10)的内容
+
+1. 下载[bash.reg](https://github.com/Manouchehri/bash-WSL-context-menu/releases/download/v1/bash.reg)，双击运行。
+2. 将[bash.ico](https://www.dropbox.com/s/m268ltv2i3nwse3/bash.ico?dl=0)下载到任意目录下。
+    <!-- [bash.ico](https://www.jianguoyun.com/p/DcsuxdEQpLkDGNHNPA) -->
+3. 进入`注册表编辑器`（Win+R➡输入`Regedit`），定位到`HKEY_CLASSES_ROOT\Directory\Background\shell\WSL`，修改`Icon`下的数据为`bash.ico`存放的位置即可。
+
+<details>
+  <summary>WSL</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows下的右键菜单管理/WSL.png" alt = "WSL" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">WSL</p>
+</details>
+
+\# 2019.7 更新
+
+> 大概在Windows10 1809/1903 以后的版本中，系统自动加入了 "Open Linux shell here"/"在此处打开 Linux Shell"的右键菜单，但不带有图标
+
+```
+HKEY_CLASSES_ROOT\Directory\Background\shell\WSL
+HKEY_CLASSES_ROOT\Directory\shell\WSL
+HKEY_CLASSES_ROOT\Drive\shell\WSL
+```
+
+
+
+这里是用于恢复原系统WSL右键菜单的文件 [WSL_1903](https://www.dropbox.com/sh/ueqlpuae0thvmtj/AABhAfTpAcbz6lixg-3-Ny5ga?dl=0)
+
+可以按此教程删除它并换用上面的：https://www.tenforums.com/tutorials/110473-add-remove-open-linux-shell-here-context-menu-windows-10-a.html
+
+
+
+## 管理“在Visual Studio中打开”
+
+### 临时隐藏“在Visual Studio中打开”（推荐）
+
+1. 目录背景下右键菜单设置  
+方法：在上文的`\HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode` (而不是command)目录下点击鼠标右键➡新建➡DWORD (32位)值，将其重命名为`HideBasedOnVelocityId`,并双击将`数值数据`设置为`006698a6`（十六进制）
+2. 目录图标上右键菜单设置  
+`HKEY_CLASSES_ROOT\Directory\shell\AnyCode` (而不是command)目录下点击鼠标右键➡新建➡DWORD (32位)值，将其重命名为`HideBasedOnVelocityId`,并双击将`数值数据`设置为`006698a6`（十六进制）
+
+
+##### 直接移除“在Visual Studio中打开”
+删除以下两项注册表即可
+
+>HKEY_CLASSES_ROOT\Directory\Background\shell\AnyCode
+>HKEY_CLASSES_ROOT\Directory\shell\AnyCode
+
+##### 将“在Visual Studio中打开”移动到Extended Context Menu
+Extended Context Menu就是在`按住Shift+鼠标右键`时显示的目录，这种方法适合不常用但仍旧要用到此功能的人，在`按住Shift+鼠标右键`时能显示出此功能。
+
+方法：在上文的两个 __../Anycode__ (而不是command)目录下点击鼠标右键➡新建➡字符串值➡输入`Extended`
+具体步骤如下图所示
+
+<details>
+  <summary>Change_Extended_Visual Studio</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows下的右键菜单管理/Change_Extended_Visual Studio.gif" alt = "Change_Extended_Visual Studio" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">Change_Extended_Visual Studio</p>
+</details>
+
+
+## 管理右键“CMD”
+
+### 永久隐藏鼠标右键下的“CMD”
+
+在 `HKEY_CLASSES_ROOT\Directory\shell\cmd` 下将 `ShowBasedOnVelocityId` 修改为 `HideBasedOnVelocityId`，这样将会在**文件夹上**按住鼠标右键时不会显示CMD。
+
+在 `HKEY_CLASSES_ROOT\Directory\Background\shell\cmd` 下将 `ShowBasedOnVelocityId` 修改为 `HideBasedOnVelocityId` ，这样在**文件夹空白处**按住鼠标右键时不会显示CMD。
+
+一般数值数据设置为 `0x00639bc8` （十六进制），非必要时不需要改动数值数据，只需重命名字符串即可。
+
+## 关于Windows Media Player
+
+<details>
+  <summary>Add to MPC-HC Playlist&Play with MPC-HC</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows%E4%B8%8B%E7%9A%84%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86/Add%20to%20MPC-HC%20Playlist%26Play%20with%20MPC-HC.png" alt = "Add to MPC-HC Playlist&Play with MPC-HC" style = "width:30%;height:30%"/>
+  <p style = "text-align:left;margin:0px auto">Add to MPC-HC Playlist&Play with MPC-HC</p>
+</details>
+
+### 移除“添加到 Windows Media Player 列表”
+
+*   使用 [Remove_Add_to_Windows_Media_Player_list_context_menu.reg](https://www.dropbox.com/s/1i63exmkum6arjw/Remove_Add_to_Windows_Media_Player_list_context_menu.reg?dl=0) 以在右键菜单中 **删除** “添加到 Windows Media Player 列表”
+*   使用 [Add_Add_to_Windows_Media_Player_list_context_menu.reg](https://www.dropbox.com/s/g465rly7s2kze79/Add_Add_to_Windows_Media_Player_list_context_menu.reg?dl=0) 以在右键菜单中 **恢复** “添加到 Windows Media Player 列表”
+
+### 移除“使用 Windows Media Player 播放”
+
+*   使用 [Remove_Play_with_Windows_Media_Player_context_menu.reg](https://www.dropbox.com/s/80fle4zl3osfwo8/Remove_Play_with_Windows_Media_Player_context_menu.reg?dl=0) 以在右键菜单中 **删除** “使用 Windows Media Player 播放”
+*   使用 [Add_Play_with_Windows_Media_Player_context_menu.reg](https://www.dropbox.com/s/1rb4pml07qyfk9g/Add_Play_with_Windows_Media_Player_context_menu.reg?dl=0) 以在右键菜单中 **恢复** “使用 Windows Media Player 播放”
+
+参考：  
+1. [https://www.tenforums.com/tutorials/83163-remove-add-windows-media-player-list-context-menu-windows-10-a.html](https://www.tenforums.com/tutorials/83163-remove-add-windows-media-player-list-context-menu-windows-10-a.html)  
+2. [https://www.tenforums.com/tutorials/83169-remove-play-windows-media-player-context-menu-windows-10-a.html](https://www.tenforums.com/tutorials/83169-remove-play-windows-media-player-context-menu-windows-10-a.html)
+
+
+## 移除“Add to MPC-HC Playlist”和“Play with MPC-HC”
+[MPC-HC](https://www.codecguide.com/) 是一款视频播放软件
+
+若在安装时勾选了最后一个选项，则会在右键目录菜单中出现“Add to MPC-HC Playlist”
+
+<details>
+  <summary>MPC-HC Installation</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows%E4%B8%8B%E7%9A%84%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86/Add%20to%20MPC-HC%20Playlist%26Play%20with%20MPC-HC-2.png" alt = "Change_Extended_MPCHC" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">MPC-HC Installation</p>
+</details>
+
+打开MPC-HC-->查看-->选项-->以管理员身份运行-->资源管理器关联菜单-->取消勾选`目录`
+
+<details>
+  <summary>Change_Extended_MPCHC</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source%2F_posts%2FWindows%E4%B8%8B%E7%9A%84%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86%2FChange_Extended_MPCHC.gif" alt = "Change_Extended_MPCHC" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">Change_Extended_MPCHC</p>
+</details>
+
+
+## 关于Powershell
+
+### 删除/隐藏原版Powershell
+
+若要彻底删除：请参考 [WSL部分](#将WSL添加到右键菜单)
+
+若想暂时隐藏：先获取目录权限，将以下路径的改成 `ShowBasedOnVelocityId` 改成 `HideBasedOnVelocityId`
+
+```
+HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell
+HKEY_CLASSES_ROOT\Directory\shell\Powershell
+```
+
+
+
+### 删除Extended Context Menu下的Powershell
+
+只要将以下两个目录下的`ShowBasedOnVelocityId`修改成`HideBasedOnVelocityId`，操作前须获取当前用户的目录权限。
+
+>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell
+>HKEY_CLASSES_ROOT\Directory\shell\Powershell
+
+
+<details>
+  <summary>Hide_Poweshell</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows下的右键菜单管理/Hide_Poweshell.gif" alt = "Hide_Poweshell" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">Hide_Poweshell</p>
+</details>
+
+
+
+#### 增强版的CMD,Powershell和Git右键菜单
+
+以CMD(Command Prompt)为例，具体的注册表相关目录结构如下
+* HKEY_CLASSES_ROOT\Directory\shell\01MenuCmd --> Directory\ContextMenus\MenuCmd  
+* HKEY_CLASSES_ROOT\Directory\background\shell\01MenuCmd --> Directory\ContextMenus\MenuCmd  
+* HKEY_CLASSES_ROOT\Directory\ContextMenus\MenuCmd  
+    * open --> Command Prompt  
+    * runas --> Command Prompt Elevated  
+
+由于该操作过于复杂，下面直接给出该实现的Reg文件
+
+* 若同时想在普通右键菜单和扩展右键菜单（Extended Context Menu）下使用
+    * 使用 [Command Prompt.reg](https://www.dropbox.com/s/nn56n0w1u5fyqly/Command%20Prompt.reg?dl=0) 以在右键菜单中 __添加__ 增强版Command Prompt
+    * 使用 [Powershell.reg](https://www.dropbox.com/s/1fdth5j20mecmbn/Powershell.reg?dl=0) 以在右键菜单中 __添加__ 增强版Command Prompt
+    * 使用 [Git.reg](https://www.dropbox.com/s/e97kgdavq5ztxun/Git.reg?dl=0) 以在右键菜单中 __添加__ 增强版Git
+
+
+
+* 若只想在扩展右键菜单（Extended Context Menu）下使用
+    * 使用 [Extended Command Prompt.reg](https://www.dropbox.com/s/2aibi4mb0gk1cw8/Extended%20Command%20Prompt.reg?dl=0) 以在右键菜单中 __添加__ 增强版Extended Command Prompt
+    * 使用 [Extended Powershell.reg](https://www.dropbox.com/s/m2nj7nebeymny85/Extended%20Powershell.reg?dl=0) 以在右键菜单中 __添加__ 增强版Extended Powershell
+    * 使用 [Extended Git.reg](https://www.dropbox.com/s/mg3wtjt078raouy/Extended%20Git.reg?dl=0) 以在右键菜单中 __添加__ 增强版Extended Git
+
+
+## 删除“使用Windows Defender扫描”
+在**目录图标上右键**会出现该菜单
+
+打开注册表，定位到 `HKEY_CLASSES_ROOT\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}`，删除 `{09A47860-11B0-4DA5-AFA5-26D86198A780}`
+
+下面提供便捷的删除/恢复文件
+
+* 使用 [Remove Windows Defender Option from Context Menu.reg](https://www.dropbox.com/s/baelgp3v2w0cs4g/Remove%20Windows%20Defender%20Option%20from%20Context%20Menu.reg?dl=0) 来 __删除__ 右键菜单中的“使用Windows Defender扫描”
+* 使用 [Restore Windows Defender Option in Context Menu.reg](https://www.dropbox.com/s/fe67pissdscqe7b/Restore%20Windows%20Defender%20Option%20in%20Context%20Menu.reg?dl=0) 来 __恢复__ 右键菜单中的“使用Windows Defender扫描”
+
+
+
+## 删除“共享”
+
+<details>
+  <summary>Sharing</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows%E4%B8%8B%E7%9A%84%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86/Sharing.png" alt = "Sharing" style = "width:30%;height:30%"/>
+  <p style = "text-align:left;margin:0px auto">Sharing</p>
+</details>
+
+
+打开注册表，定位到`HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers`, 在`ModernSharing`的数据前加上一些英文破折号`----`
+
+<details>
+  <summary>Disable_Sharing</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows%E4%B8%8B%E7%9A%84%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86/Disable_Sharing.png" alt = "Disable_Sharing" style = "width:60%;height:60%"/>
+  <p style = "text-align:left;margin:0px auto">Disable_Sharing</p>
+</details>
+
+
+## 删除“🐧通过QQ发送到”
+
+由于目前最新版本的QQ仍旧支持在设置中关闭这个功能，所以更推荐于在设置中关闭而不是修改注册表。
+
+<details>
+  <summary>Remove_QQ</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Windows下的右键菜单管理/Remove_QQ.png" alt = "Remove_QQ" style = "width:60%;height:60%"/>
+  <p style = "text-align:left;margin:0px auto">Remove_QQ</p>
+</details>
+
+
+## 参考资料
+* 探析注册表
+    * https://www.howtogeek.com/howto/windows-vista/how-to-clean-up-your-messy-windows-context-menu/
+* WSL相关
+    * https://docs.microsoft.com/zh-cn/windows/wsl/install-win10
+    * https://github.com/Microsoft/WSL/issues/603
+    * https://github.com/Manouchehri/bash-WSL-context-menu
+* Visual Studio相关
+    * https://developercommunity.visualstudio.com/content/problem/26397/disable-context-menu-for-open-in-visual-studio.html
+* Github中的注册表大全
+    * https://github.com/AmrEldib/WindowsContextMenuCustomizations
+* MPC-HC相关
+    * http://codecs.forumotion.net/t1921-disable-folder-context-menu
+    * https://www.youtube.com/watch?v=Djxk1GcXqQI
+* 增强版的CMD和Powershell右键菜单
+    * https://blogs.msdn.microsoft.com/andrew_richards/2017/03/01/enhancing-the-open-command-prompt-here-shift-right-click-context-menu-experience/
+* 删除“使用Windows Defender扫描”
+    * https://www.askvg.com/tip-remove-scan-with-windows-defender-option-from-context-menu-in-windows-10/
+* 删除“共享”
+    * http://www.thewindowsclub.com/remove-share-button-context-menu-windows-10
+* Windows注册表脚本文件的编写
+    * http://blog.csdn.net/shuilan0066/article/details/5983129

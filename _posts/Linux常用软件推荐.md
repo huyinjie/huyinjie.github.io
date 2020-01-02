@@ -1,0 +1,271 @@
+---
+title: Linux常用软件推荐
+date: 2018-03-14
+tags:
+---
+
+ <!-- more --> 
+
+<!-- TOC -->
+
+- [系统工具](#系统工具)
+- [截图相关](#截图相关)
+- [系统监控](#系统监控)
+- [密码管理🔑](#密码管理🔑)
+- [开发工具](#开发工具)
+- [日常软件](#日常软件)
+- [多人使用&远程连接](#多人使用远程连接)
+- [常用命令替换](#常用命令替换)
+    - [使用fd代替find](#使用fd代替find)
+    - [使用ccat代替cat实现高亮](#使用ccat代替cat实现高亮)
+    - [历史命令查找](#历史命令查找)
+    - [使用fkill代替kill](#使用fkill代替kill)
+    - [使用tldr代替man](#使用tldr代替man)
+    - [使用cppman](#使用cppman)
+    - [使用icdiff代替diff](#使用icdiff代替diff)
+    - [使用ncdu代替du](#使用ncdu代替du)
+    - [使用glances代替htop/top](#使用glances代替htoptop)
+
+<!-- /TOC -->
+
+
+
+本文使用📦表示该软件有GUI，使用📺表示该软件是CLI。
+
+> https://www.cyberciti.biz
+>
+> https://www.kde.org/applications/
+
+#### 系统工具
+ukuu📦 对基于Ubuntu的发行版的内核升级工具 https://github.com/teejee2008/ukuu 
+> 可能会出现 ("internet conection is not active"](https://github.com/teejee2008/ukuu/issues/49#issuecomment-418331325) 的问题，可使用此[Bash Script](https://github.com/pimlie/ubuntu-mainline-kernel.sh)来代替ukuu
+
+#### 截图相关
+
+在Gnome下：Shutter📦 强大的截图工具 http://shutter-project.org/  
+在Kde下：Spectacle📦 https://github.com/KDE/spectacle  
+通用：flameshot📦 https://github.com/lupoDharkael/flameshot  
+
+
+#### 系统监控
+
+* top📺、htop📺、gtop📺、atop📺、nmon📺 
+* s-tui📺 监控CPU温度，频率，功率和利用率；集成CPU压力测试模式 https://github.com/amanusk/s-tui
+* Psensor📦 Linux的图形硬件温度监视器http://wpitchoune.net/psensor/
+* Glances📺 https://github.com/nicolargo/glances
+* Stacer📦 用Electron实现的系统监控应用 https://github.com/oguzhaninan/Stacer
+* pscircle📺 以径向树的形式可视化Linux进程 https://gitlab.com/mildlyparallel/pscircle 来自 [Reddit](https://www.reddit.com/r/unixporn/comments/8v9r19/oc_ive_just_created_a_program_for_drawing_process/)
+  <details>
+    <summary>Show Screenshot</summary> <img src="https://i.redd.it/62tf3hbq2c711.png" alt = "pscircle" />
+    <p style = "text-align:center;margin:0px auto">Pscircle Preview</p>
+  </details> 
+
+#### 密码管理🔑
+* Password Safe📦 - A password manager for GNOME https://gitlab.gnome.org/World/PasswordSafe
+
+#### 开发工具
+* lazygit📺 - simple terminal UI for git commands
+* Lepton📦 - Gist管理工具 
+
+#### 日常软件
+* lf📺 - 终端下的文件管理器 https://github.com/gokcehan/lf
+* weweChat 微信第三方客户端  https://github.com/trazyn/weweChat
+* ieaseMusic 网易云音乐第三方客户端  https://github.com/trazyn/ieaseMusic
+
+#### 多人使用&远程连接
+* sudo_pair📺 - sudo插件，获取sudo权限时需要服务器上另一个人批准https://github.com/square/sudo_pair
+
+#### 常用命令替换
+##### 使用fd代替find
+
+[sharkdp/fd: A simple, fast and user-friendly alternative to 'find'](https://github.com/sharkdp/fd) 是一个简单、快速、用户友好的find命令的替代品，当然，fd并不能完全替代find，它包含了日常使用约80%的使用场景。
+
+Ubuntu：在 [release page](https://github.com/sharkdp/fd/releases) 下载最新 `deb` 包并安装
+
+```
+sudo dpkg -i fd_6.3.0_amd64.deb
+```
+
+Archlinux
+
+```bash
+pacman -S fd
+```
+
+完整的使用教程请查看 [Tutorial](https://github.com/sharkdp/fd#tutorial)
+
+
+##### 使用ccat代替cat实现高亮
+
+[jingweno/ccat: Colorizing cat](https://github.com/jingweno/ccat)  是 `cat` 的高亮版本，支持多种语言，遵循POSIX标准
+
+Archlinux
+
+```bash
+pacaur -S ccat
+```
+
+Ubuntu及其他发行版：在 [compiled binaries](https://github.com/jingweno/ccat/releases)下载最新的编译包并将其解压缩后的`ccat ` 放到系统的 `$PATH` 下
+
+```
+sudo cp ccat /bin/
+```
+
+
+
+##### 历史命令查找
+
+- ###### Ctrl + R 
+
+  直接在控制台中输入 `Ctrl + R` ，会自动补全当前的输入，使用方向键➡完成补全，或使用 `回车` 直接运行命令
+
+- ###### zsh-autosuggestions
+  [zsh-users/zsh-autosuggestions: Fish-like autosuggestions for zsh](https://github.com/zsh-users/zsh-autosuggestions) zsh插件，相当于自动的`Ctrl + R`，每次只能显示一个候选补全
+
+- ###### 使用fzf
+
+  [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf) 是一个通用的命令行模糊查找器，安装fzf后会覆盖掉 `Ctrl + R` 这个快捷键，每次能显示多个候选补全
+
+  使用Git安装
+
+  ```bash
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+  ```
+
+
+  <table border="1">
+      <tr>
+          <td width="60">CTRL-R</td>
+          <td>在命令行下按下ctrl-r, fzf会列出history命令，选中条目并离开fzf的话， 选中条目会被拷到命令行上在zsh下可以使用下面的方法来按下C-XC-R来直接执行</td>
+      </tr>
+      <tr>
+          <td width="60">CTRL-T</td>
+          <td>在命令行下按下ctrl-t会打开fzf窗口，如果你选中某个条目并按下Enter， 选中的条目会被拷贝到命令行上如果想同时预览文件内容，可以使用--preview选项</td>
+      </tr>
+      <tr>
+          <td width="60">ALT-C</td>
+          <td>在命令行上按下alt-c, 会列出当前文件夹下的目录，选中条目会自动进入到相应目录</td>
+      </tr>
+  </table>
+
+##### 使用fkill代替kill
+
+[sindresorhus/fkill-cli: Fabulously kill processes. Cross-platform.](https://github.com/sindresorhus/fkill-cli) 是一个自带进程名自动补全的 `kill`
+
+安装
+
+```bash
+npm install --global fkill-cli
+```
+
+
+
+##### 使用tldr代替man
+
+[tldr-pages/tldr: Simplified and community-driven man pages](https://github.com/tldr-pages/tldr)  "Too Long; Didn't Read". 是一个简化的 `man` 手册，类似的项目还有[Cheat](https://github.com/chrisallenlane/cheat) 、[Bro pages](http://bropages.org/)、[eg](https://github.com/srsudar/eg)
+
+安装nodejs版并使用nvm管理nodejs
+
+[creationix/nvm: Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm) 是一个Node版本管理器，官方更推荐使用这种方式安装 Nodejs
+
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+```
+
+使用如下命令解决sudo不能使用npm的问题
+
+```bash
+n=$(which node); \
+n=${n%/bin/node}; \
+chmod -R 755 $n/bin/*; \
+sudo cp -r $n/{bin,lib,share} /usr/local
+```
+
+> 参考资料 [node.js - Can't use NVM from root (or sudo) - Stack Overflow](https://stackoverflow.com/questions/21215059/cant-use-nvm-from-root-or-sudo?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+
+```bash
+sudo -H npm uninstall -g tldr
+sudo -H npm uninstall -g webworker-threads
+npm install -g node-gyp
+npm install -g webworker-threads
+npm install -g tldr
+```
+
+
+
+安装python版本
+
+```bash
+pip3 install tldr
+```
+
+添加颜色支持
+
+在 `HOME` 目录中新建一个名为 `tldrrc` 的文件，放入以下内容
+
+```json
+{
+  "themes": {
+    "ocean": {
+      "commandName": "bold, cyan",
+      "mainDescription": "",
+      "exampleDescription": "green",
+      "exampleCode": "cyan",
+      "exampleToken": "dim"
+    },
+    "myOwnCoolTheme": {
+      "commandName": "bold, red",
+      "mainDescription": "underline",
+      "exampleDescription": "yellow",
+      "exampleCode": "underline, green",
+      "exampleToken": ""
+    }
+  },
+  "theme": "ocean"
+}
+```
+
+> 参考资料 [Configuration](https://github.com/tldr-pages/tldr-node-client#configuration)
+
+
+
+##### 使用cppman
+
+[aitjcize/cppman: C++ 98/11/14 manual pages for Linux/MacOS](https://github.com/aitjcize/cppman) 相当于终端下的Dash/Zeal
+
+假如系统中默认的Python解释器是3及以上版本的，直接用pip安装，否则调用pip3
+
+```bash
+pip install cppman
+```
+
+
+
+##### 使用icdiff代替diff
+
+[jeffkaufman/icdiff: improved colored diff](https://github.com/jeffkaufman/icdiff) 该命令在对比两个大文件时，速度会显著下降，大约为diff的1/10
+
+使用Pip安装
+
+```bash
+pip install git+https://github.com/jeffkaufman/icdiff.git
+```
+
+
+
+##### 使用ncdu代替du
+
+```bash
+sudo apt-get install ncdu
+```
+
+
+
+##### 使用glances代替htop/top
+
+[nicolargo/glances: Glances an Eye on your system. A top/htop alternative.](https://github.com/nicolargo/glances) 
+
+```bash
+pip install glances
+```

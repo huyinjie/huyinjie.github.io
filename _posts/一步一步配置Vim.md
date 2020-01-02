@@ -1,0 +1,232 @@
+---
+title: Vim配置指南
+date: 2017/12/20
+updated: 2017/12/20
+notag: true	
+tags: Linux
+---
+ <!-- more --> 
+ 
+> 本文以Ubuntu16.04为基础
+
+<!-- TOC -->
+
+- [编译安装](#编译安装)
+- [准备安装YCM](#准备安装ycm)
+- [安装Vim下的Solarized配色](#安装vim下的solarized配色)
+- [安装 `NERDTree`](#安装-nerdtree)
+- [安装jedi](#安装jedi)
+    - [安装vim-airline和vim-airline-themes](#安装vim-airline和vim-airline-themes)
+- [.vimrc 参考](#vimrc-参考)
+- [参考资料](#参考资料)
+
+<!-- /TOC -->
+
+
+### 编译安装
+先使用命令 `:echo has('python') || has('python3')` 检查结果是否为1，若不是删除现有的vim重新编译安装
+
+> 参考资料  
+> https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+
+1\. 安装依赖库
+
+   ```bash
+   sudo apt install libncurses5-dev libgnome2-dev libgnomeui-dev \
+       libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+       libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+       python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
+   ```
+
+2\. 卸载系统自带Vim
+
+   ```bash
+   sudo apt remove vim vim-runtime gvim
+   ```
+
+3\. 编译选项
+
+   ```bash
+   cd ~
+   git clone https://github.com/vim/vim.git
+   cd vim
+   ./configure --with-features=huge \
+               --enable-multibyte \
+               --enable-rubyinterp=yes \
+               --enable-pythoninterp=yes \
+               --enable-python3interp=yes \
+               --with-python3-config-dir=/usr/lib/python3.5/config \
+               --enable-perlinterp=yes \
+               --enable-luainterp=yes \
+               --enable-gui=gtk2 \
+               --enable-cscope \
+               --prefix=/usr/local
+   make VIMRUNTIMEDIR=/usr/local/share/vim/vim80
+   ```
+
+4\. 安装
+
+   ```bash
+   cd ~/vim
+   sudo make install
+   ```
+
+### 准备安装YCM
+
+1\. 检查Vim版本
+   在Vim中输入以下命令，若输出为1，则继续
+   ```bash
+   :echo has('python') || has('python3')
+   ```
+
+2\. 安装 `Vundle`
+   ```bash
+   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   ```
+
+3\. 在 `~/.vimrc` 插入以下代码
+   ```json
+   set nocompatible
+   filetype off
+
+   set rtp+=~/.vim/bundle/Vundle.vim
+   call vundle#begin()
+   Plugin 'VundleVim/Vundle.vim'
+   Plugin 'Valloric/YouCompleteMe'
+
+   call vundle#end()
+   filetype plugin indent on
+   ```
+
+4\. 打开Vim，运行 `:PluginInstall`
+若在安装中出现网络问题无法安装，可以手动 `git clone` 到 `~/.vim/bundle/YouCompleteMe` 然后执行 `install.py`
+
+5\. 使用 `aptitude` 安装 `libclang`
+
+   ```bash
+   sudo apt-get update
+   sudo apt-get install aptitude
+   sudo aptitude install llvm-3.9 clang-3.9 libclang-3.9-dev libboost-all-dev
+   ```
+
+6\. 编译构建 `ycm_core` 库
+
+   ```bash
+   mkdir ~/.ycm_build
+   cd ~/.ycm_build
+   cmake -G "Unix Makefiles" -DUSE_SYSTEM_BOOST=ON -DEXTERNAL_LIBCLANG_PATH=/usr/lib/x86_64-linux-gnu/libclang-3.9.so . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+   cmake --build . --target ycm_core --config Release
+   ```
+
+7\. 复制 `.ycm_extra_conf.py` 文件
+
+   ```
+   cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py ~/.vim/
+   ```
+
+8\. 在 `~/.vimrc`中添加如下两行
+
+   ```
+   let g:ycm_server_python_interpreter='/usr/bin/python'
+   let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+   ```
+
+
+### 安装Vim下的Solarized配色
+
+1\. 在 `.vimrc` 中添加
+
+   ```bash
+   Plugin 'micha/vim-colors-solarized'
+   ```
+
+
+2\. 打开Vim，运行 `:PluginInstall`
+
+3\. 在 `.vimrc` 中添加
+
+   ```
+   syntax enable
+   set background=dark
+   let g:solarized_termtrans = 1
+   colorscheme solarized
+   ```
+
+### 安装 `NERDTree`
+
+1\. 在 `.vimrc` 中添加
+
+   ```bash
+   Plugin 'scrooloose/nerdtree'
+   ```
+
+2\. 打开Vim，运行 `:PluginInstall`
+
+3\. 在 `.vimrc` 中添加,使按F3时能打开NERDTree
+
+   ```bash
+   map <F2> :NERDTreeToggle<CR>
+   ```
+
+
+
+### 安装jedi
+
+1\. 在 `.vimrc` 中添加
+
+   ```bash
+   Plugin 'davidhalter/jedi-vim'
+   ```
+
+2\. 打开Vim，运行 `:PluginInstall`
+
+
+
+
+#### 安装vim-airline和vim-airline-themes
+
+1\. 在 `.vimrc` 中添加
+
+   ```bash
+   Plugin 'vim-airline/vim-airline'
+   Plugin 'vim-airline/vim-airline-themes'
+   ```
+
+2\. 打开Vim，运行 `:PluginInstall`
+
+3\. 在 `.vimrc` 中添加
+
+   ```bash
+   set t_Co=24      " Explicitly tell Vim that the terminal supports 256 colors
+   set laststatus=2
+   let g:airline_powerline_fonts=1
+   let g:airline#extensions#tabline#enabled=1    " enable tabline
+   let g:airline#extensions#tabline#buffer_nr_show=1    " 显示buffer行号
+   let g:airline_theme="simple"
+   ```
+
+> 这里设置`set t_Co=24`主要是防止亮瞎
+
+
+
+
+### .vimrc 参考
+
+{% gist ba42bc4fa3ace801d36bd13989117ae6 .vimrc %}
+
+
+
+### 参考资料
+
+* https://github.com/Valloric/YouCompleteMe/issues/2136
+* http://www.jianshu.com/p/d908ce81017a
+* https://github.com/Valloric/YouCompleteMe#full-installation-guide
+* https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+* https://vimawesome.com/plugin/vim-colors-solarized
+* https://github.com/altercation/vim-colors-solarized
+* https://github.com/altercation/vim-colors-solarized/issues/138
+* https://vi.stackexchange.com/questions/2162/why-doesnt-the-backspace-key-work-in-insert-mode
+* https://stackoverflow.com/questions/234564/tab-key-4-spaces-and-auto-indent-after-curly-braces-in-vim
+* https://vi.stackexchange.com/questions/5335/how-to-install-nerdtree-with-vundle
+* http://www.jianshu.com/p/eXMxGx
+* https://github.com/vim-airline/vim-airline/wiki/Screenshots

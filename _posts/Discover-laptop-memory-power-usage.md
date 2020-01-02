@@ -1,0 +1,168 @@
+---
+title: Discover RAM and its power usage
+date: 2018-06-20 16:08:54
+tags: Hardware
+mathjax: true
+---
+ <!-- more --> 
+
+<!-- TOC -->
+
+- [DDR SDRAM](#ddr-sdram)
+- [Mobile DDR](#mobile-ddr)
+- [GDDR](#gddr)
+- [Difference between DDR4, DDR3, LPDDR3, DDR3L](#difference-between-ddr4-ddr3-lpddr3-ddr3l)
+- [Part Catalog](#part-catalog)
+- [Why Apple choose 16GB as the maximum memory of Macbook](#why-apple-choose-16gb-as-the-maximum-memory-of-macbook)
+- [Difference Between SRAM and DRAM](#difference-between-sram-and-dram)
+- [About CPU Cache](#about-cpu-cache)
+
+<!-- /TOC -->
+
+#### DDR SDRAM
+
+DDR SDRAM ( Double Data Rate Synchronous Dynamic Random Access Memory, 双倍数据率同步动态随机存取存储器 ) 
+
+<details>
+  <summary>Comparison of memory modules for desktop PCs (DIMM)</summary> <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Discover-laptop-memory-power-usage/Comparison of memory modules for desktop PCs (DIMM).svg" alt = "Comparison of memory modules for desktop PCs (DIMM)" style = "width:60%;height:60%"/>
+  <p style = "text-align:left;margin:0px auto">Picture form wikipedia</p>
+</details>  
+
+> 参考：[DDR SDRAM* Wikipedia](https://en.wikipedia.org/wiki/DDR_SDRAM)
+
+#### Mobile DDR
+
+Mobile DDR ( Low Power Double Data Rate Synchronous Dynamic Random Access Memory , 低功耗双倍数据率同步动态随机存取存储器) 也称被为 mDDR, Low Power DDR, LPDDR 或 LP-DDR
+
+> 参考：[Mobile DDR* Wikipedia](https://en.wikipedia.org/wiki/Mobile_DDR)
+
+
+#### GDDR
+Graphics DDR SDRAM ( Double data rate type five synchronous graphics random-access memory )
+
+> 参考：[GDDR SDRAM* Wikipedia](https://en.wikipedia.org/wiki/GDDR_SDRAM)
+
+
+
+#### Difference between DDR4, DDR3, LPDDR3, DDR3L 
+
+以 [i7-7660U](https://ark.intel.com/products/97537/Intel-Core-i7-7660U-Processor-4M-Cache-up-to-4_00-GHz) 和 [i7-6660U](https://ark.intel.com/products/91169/Intel-Core-i7-6660U-Processor-4M-Cache-up-to-3_40-GHz) 为例，其支持DDR4-2133, LPDDR3-1866, DDR3L-1600，而目前的最强八代低压酷睿 [i7-8559U](https://ark.intel.com/products/137979/Intel-Core-i7-8559U-Processor-8M-Cache-up-to-4_50-GHz) 也只能支持到 DDR4-2400,  LPDDR3-2133
+
+2013款 Macbook Air 首次使用了 LPDDR3
+
+> The short summary is, LPDDR3 is more expensive but has much lower standby power and a better form factor for mobile devices; while DDR3 and DDR3L are less expensive and consume more power but are more suitable for larger memory arrays found in PCs and servers. 
+>
+> **Marc Greenberg**  ----  [Committed to Memory](https://blogs.synopsys.com/committedtomemory/2014/01/10/when-is-lpddr3-not-lpddr3-when-its-ddr3l/) 
+
+> 简而言之，LPDDR3更昂贵，但其待机功耗更低，在移动设备上的外形更好;  而DDR3和DDR3L价格便宜，功耗更高，但更适合用于PC和服务器中的大容量存储。 
+
+<details>
+  <summary>Comparison between DDR3, DDR3L and LPDDR3 Devices
+</summary> <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Discover-laptop-memory-power-usage/DDR3-DDR3L-LPDDR3-Comparison.jpg" alt = "Comparison between DDR3, DDR3L and LPDDR3" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">Comparison between DDR3, DDR3L and LPDDR3 Devices</p>
+</details>
+<p></p>
+
+> **FYI**  
+> 1\. [LPDDR3 vs DDR4 power usage：hardware](https://www.reddit.com/r/hardware/comments/5dimal/lpddr3_vs_ddr4_power_usage/)  
+> 2\. [Slide View : Parallel Computer Architecture and Programming : 15-418/618 Spring 2017](http://15418.courses.cs.cmu.edu/spring2017/lecture/memory/slide_005)  
+> 3\. [LPDDR3 and LPDDR3: How Low-Power DRAM Can Be Used inHigh-Bandwidth Applications](https://www.jedec.org/sites/default/files/M_Greenberg_Mobile%20Forum_May_%202013_Final.pdf)
+
+
+
+#### Part Catalog
+
+Micron 镁光：[https://www.micron.com/products/dram](https://www.micron.com/products/dram)
+
+Samsung 三星：[https://www.samsung.com/semiconductor/dram](https://www.samsung.com/semiconductor/dram/)
+
+SK hynix 海力士：[https://www.skhynix.com/products.do?lang=eng&ct1=36&ct2=37&rc=com](https://www.skhynix.com/products.do?lang=eng&ct1=36&ct2=37&rc=com)
+
+
+
+#### Why Apple choose 16GB as the maximum memory of Macbook
+
+苹果营销总监 Phil Schiller 此前回应了软件工程师 Ben Slaney 的一份电子邮件的，进一步阐明了为什么Macbook Pro ( 16款 ) 最大支持16GB的内存
+
+> To put more than 16GB of fast RAM into a notebook design at this time would require a memory system that consumes much more power and wouldn’t be efficient enough for a notebook. I hope you check out this new generation MacBook Pro, it really is an incredible system.
+
+> 一言以蔽之：使用32GB内存会减少电池寿命
+
+MACDADDY 上的全文：[Why the MacBook Pro is limited to 16GB of RAM](https://macdaddy.io/macbook-pro-limited-16gb-ram/)
+
+相关报道：
+
+ * [Phil Schiller Says 32GB RAM on New MacBook Pro Would Have Required Battery Compromising Design* Mac Rumors](https://www.macrumors.com/2016/11/21/phil-schiller-32gb-ram-mbp-logic-board/)
+* [Apple says new MacBook Pro’s 16GB RAM limitation is to maintain battery life efficiency | 9to5Mac](https://9to5mac.com/2016/10/28/apple-macbook-pro-16gb-ram-limitation-battery-efficiency/)
+
+也有人认为这和 FAA 的100W 瓦以上的电池不能托运的政策有关，但在FAA的FAQ只指出了100Wh的电池不能散装，安装在笔记本中的电池明显不符合此限制
+
+> [Batteries Carried by Airline Passengers FAQ](https://www.faa.gov/about/office_org/headquarters_offices/ash/ash_programs/hazmat/passenger_info/media/airline_passengers_and_batteries.pdf)
+
+根据上文Part Catalog中的三家厂商，这里只统计掌握Mobile DDR技术的三星与镁光
+
+|      | LPDDR3  Max  Density | LPDDR4  Max  Density |
+| ---- | -------------------- | -------------------- |
+| 镁光 | 32 Gb                | 32 Gb                |
+| 三星 | 48 Gb                | 64 Gb                |
+
+需要注意的是 $8Gb = 1GB$ 
+
+下面以 [MacBook Pro 15" Touch Bar Late 2016 的拆解](https://zh.ifixit.com/Guide/%E9%85%8D%E5%A4%87Touch+Bar%E7%9A%8415%E8%8B%B1%E5%AF%B8MacBook+Pro%E6%8B%86%E8%A7%A3/73395) 为例，简要说明为什么Macbook Pro不支持32GB内存
+
+* 15.4英寸 LED背光视网膜屏 2880 x 1800分辨率（像素密度220ppi），P3色域
+* 2.6GHz Skylake 四核心 英特尔酷睿i7处理器（睿频可到3.5GHz）以及AMD Radeon Pro 450 配备2GB GDDR5显存
+* 16 GB 2133MHz LPDDR3 板载内存
+* 256 GB PCIe 板载固态硬盘（可选配512 GB，1 TB和2 TB固态硬盘）
+* 四个 Thunderbolt 3（USB-C）接口，支持充电，DisplayPort（DP）视频输出，Thunderbolt接口，USB 3.1 Gen 2
+* Touch Bar 以及Touch ID传感器
+* Force Touch（压感）触控板
+
+这是其主板正面图 来自 [ifixit](https://zh.ifixit.com/Guide/Image/meta/CSVuDEmvqgaDMqSn)
+
+<details>
+  <summary>Show Picture</summary> 
+  <img src="https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/Discover-laptop-memory-power-usage/CSVuDEmvqgaDMqSn.jpg" alt = "Comparison between DDR3, DDR3L and LPDDR3 Devices" style = "width:100%;height:100%"/>
+  <p style = "text-align:left;margin:0px auto">MacBook Pro 15" Touch Bar Teardown</p>
+</details>
+<p></p>
+
+
+橙色部分为镁光 [MT52L1G32D4PG-093](https://www.micron.com/parts/dram/mobile-ddr3-sdram/mt52l1g32d4pg-107-wt?pc=%7B55AE905C-E597-4C5F-9CE7-9A9C11244649%7D) ( 单片4GB LPDDR3，四个芯片共计16GB)，可以看到，主板设计十分紧凑，已经没有空间再放置四块4GB LPDDR3(除非减少电池容量), 即使使用三星的单片6GB LPDDR3( 如 [K3QFBFB0CM-FGCF](https://www.samsung.com/semiconductor/dram/lpddr3/K3QFBFB0CM-FGCF/) 或 [K4E8E324EB-EGCF](https://www.samsung.com/semiconductor/dram/lpddr3/K4E8E324EB-EGCF/) )也无法满足，想要保持原有主板设计大体不变且电池容量不变，只能使用单片8GB LPDDR4( 如三星的 [K3RG8G80MM-MGCJ](https://www.samsung.com/semiconductor/dram/lpddr4/K3RG8G80MM-MGCJ/) )
+
+
+> **FYI**  
+> 1\. [Macbook Pro 16GB RAM Limit Exploration* Page 2* LTT Official* Linus Tech Tips](https://linustechtips.com/main/topic/692271-macbook-pro-16gb-ram-limit-exploration/?page=2&tab=comments#comment-8883365)  
+> 2\. [Apple Macbook Pro 16GB RAM Limit* The Truth* YouTube](https://www.youtube.com/watch?v=axZBbgfEZf0&t=0s)
+> 3\. [6th Generation Intel® Processor Datasheet for U/Y-Platforms](https://www.intel.com/content/dam/www/public/us/en/documents/datasheets/6th-gen-core-family-mobile-u-y-processor-lines-datasheet-vol-1.pdf) 
+> 4\.  [MacBook Pro 13" Touch Bar 2017 拆解* iFixit](https://www.ifixit.com/Guide/MacBook+Pro+13-Inch+Touch+Bar+2017+%E6%8B%86%E8%A7%A3/92171?lang=zh)
+
+
+
+
+
+#### Difference Between SRAM and DRAM
+
+RAM 存储器可以进一步分为静态随机存取存储器（SRAM）和动态随机存取存储器（DRAM）两大类。在电力切断以后，储存于SRAM或DRAM中的数据将很快消失。
+
+SRAM: 具有快速访问的优点，但生产成本较为昂贵，一个典型的应用是缓存。
+
+> 每个bit使用6个晶体管，所以不能在芯片上装载几乎所有的晶体管，所以它的**密度较低**。但是SRAM的速度比DRAM快得多，因为它们不需要刷新。
+>
+> From:  [静态随机存取存储器 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E9%9D%99%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)
+
+DRAM: 由于具有较低的单位容量价格，所以被大量的采用作为系统的主存。
+
+> 由于在现实中晶体管会有漏电电流的现象，导致电容上所存储的电荷数量并不足以正确的判别数据，而导致数据毁损。因此对于DRAM来说，周期性地充电是一个无可避免的要件。由于这种需要定时刷新的特性，因此被称为“动态”存储器。 DRAM**密度非常高**，单位体积的容量较高，因此成本较低。但相反的，DRAM也有访问速度较慢，耗电量较大的缺点。
+>
+> From:  [动态随机存取存储器 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)
+
+
+> **FYI**  
+> 1\. [Difference Between SRAM and DRAM](http://www.differencebetween.net/technology/difference-between-sram-and-dram/)  
+>2\. [What is the difference between SRAM and DRAM?* Quora](https://www.quora.com/What-is-the-difference-between-SRAM-and-DRAM)
+
+
+
+#### About CPU Cache
+
