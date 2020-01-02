@@ -1,13 +1,18 @@
 ---
-title: 使用Telegram-cli完成自动化签到
-date: 2018/2/22
-updated: 2018/2/22	
-tags: Linux
+layout:     post
+title:      使用Telegram-cli完成自动化签到
+date:       2018-02-22 20:00:00
+author:     HYJ
+header-img: img/default.jpg
+catalog: true
+tags:
+    - Linux
 ---
+
 
 如今越来越多的网站使用Telegram Bot签到，[telegram-cli](https://github.com/vysheng/tg) 是一个Telegram的[非官方客户端](https://telegram.org/apps)，可以实现在终端中访问Telegram，本文使用telegram-cli+crontab完成了自动签到
  <!-- more --> 
-#### 在 CentOS 下安装 telegram-cli
+# 在 CentOS 下安装 telegram-cli
 
 快速编译安装
 
@@ -76,7 +81,7 @@ chmod +x ~/tg/mytg/telegram_standalone.sh
 
 
 
-#### 修改系统时区
+# 修改系统时区
 
 如果使用国外VPS执行crontab定期任务，务必修改时区并**重启crontab服务**
 
@@ -95,7 +100,7 @@ service crond restart
 
 
 
-#### 新建crontab任务
+# 新建crontab任务
 
 将vim设为默认文本编辑器
 
@@ -130,7 +135,7 @@ crontab -e
 
 
 
-##### 参考资料
+## 参考资料
 
 * https://github.com/vysheng/tg/issues/1325
 * https://github.com/vysheng/tg/issues/290
