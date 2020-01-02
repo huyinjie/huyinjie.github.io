@@ -45,7 +45,7 @@ tags:
 
 # 参考资料
 
-* [MongoDB Compass 图形界面管理工具初探 | MongoDB中文社区](http://www.mongoing.com/blog/post/getting-started-with-mongodb-compass)
+* [MongoDB Compass 图形界面管理工具初探 - MongoDB中文社区](http://www.mongoing.com/blog/post/getting-started-with-mongodb-compass)
 * [Connect to MongoDB Atlas Using Robo 3T (Robomongo) — Datduh!](https://www.datduh.com/blog/2017/7/26/how-to-connect-to-mongodb-atlas-using-robo-3t-robomongo)
 * [robo3t - How can I connect to mongodb atlas using robomongo? - Stack Overflow](https://stackoverflow.com/questions/43694799/how-can-i-connect-to-mongodb-atlas-using-robomongo?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
 * [[1.0 RC1] Can't connect to replica set to MongoDB Atlas Cluster 3.4 · Issue #1299 · Studio3T/robomongo](https://github.com/Studio3T/robomongo/issues/1299)
