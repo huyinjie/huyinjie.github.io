@@ -9,7 +9,7 @@ tags:
     - MongoDB
 ---
 
-#### 连接到MongoDB Compass
+# 连接到MongoDB Compass
 1. 进入MongoDB Atlas控制台，点击 connect
   ![1-1](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/1-1.png)
 
@@ -24,7 +24,7 @@ tags:
 
 
 
-#### 连接到Robo 3T
+# 连接到Robo 3T
 在2016年8月后Robomongo添加了对SSL和MongoDB Atlas的连接支持，（官方连接教程见 [Robomongo RC10 brings support to SSL](http://blog.robomongo.org/robomongo-rc10/)），在2017年7月后Robomongo改名为Robo 3T ([Robomongo is now Robo 3T, with MongoDB 3.4 support](http://blog.robomongo.org/robomongo-is-robo-3t/))
 
 
@@ -43,11 +43,7 @@ tags:
   ![2-4](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-4.png)
 
 
-
-
-&nbsp;&nbsp;
-
-#### 参考资料
+# 参考资料
 
 * [MongoDB Compass 图形界面管理工具初探 | MongoDB中文社区](http://www.mongoing.com/blog/post/getting-started-with-mongodb-compass)
 * [Connect to MongoDB Atlas Using Robo 3T (Robomongo) — Datduh!](https://www.datduh.com/blog/2017/7/26/how-to-connect-to-mongodb-atlas-using-robo-3t-robomongo)
