@@ -1,9 +1,13 @@
 ---
-title: 利用Proxychains-ng和Privoxy实现多种代理
-date: 2018-03-12 20:11:18
-tags: Proxy
+layout:     post
+title:      利用Proxychains-ng和Privoxy实现多种代理
+date:       2018-03-12 20:11:18
+author:     HYJ
+header-img: img/tag-bg-o.jpg
+catalog: true
+tags:
+    - Proxy
 ---
- <!-- more --> 
 
 <!-- TOC -->
 
@@ -23,7 +27,7 @@ tags: Proxy
 
 <!-- /TOC -->
 
-### 临时使用代理
+# 临时使用代理
 这种方法只对当前终端有效，如果是http代理，则输入：
 
 ```
@@ -38,9 +42,9 @@ export ALL_PROXY=socks5://127.0.0.1:1080
 
 
 
-### 安装Shadowsocks
+# 安装Shadowsocks
 
-#### 安装Shadowsocks-qt5
+## 安装Shadowsocks-qt5
 
 Ubuntu/Debian
 
@@ -54,7 +58,7 @@ sudo pacman -S 	shadowsocks-qt5
 
 
 
-#### 安装shadowsocks Python
+## 安装shadowsocks Python
 
 ```bash
 sudo apt-get install libsodium-dev
@@ -85,7 +89,7 @@ nohup sslocal -s 服务器地址 -p 服务器端口 -l 本地端端口 -k 密码
 
 
 
-#### 安装Shadowsocks-libev
+## 安装Shadowsocks-libev
 
 参考官方教程 [shadowsocks/shadowsocks-libev: libev port of shadowsocks](https://github.com/shadowsocks/shadowsocks-libev#build-deb-package-from-source) 
 
@@ -145,11 +149,11 @@ dpkg -i *shadowsocks-libev*.deb
 
 
 
-### 使用proxychains-ng
+# 使用proxychains-ng
 
 [Proxychains ng](https://github.com/rofl0r/proxychains-ng) 是新一代的proxychains（原项目已不再维护），这是Github上对其的介绍：一个预加载器，它将调用与动态链接程序中的套接字挂钩，并通过一个或多个socks/http代理重定向它。
 
-#### 安装Proxychains-ng 
+## 安装Proxychains-ng 
 Archlinux下直接安装即可
 ```bash
 sudo pacman -S proxychains-ng
@@ -170,7 +174,7 @@ sudo make install-config
 
 
 
-#### 配置Proxychains-ng
+## 配置Proxychains-ng
 
 ```bash
 sudo vim /etc/proxychains.conf
@@ -179,7 +183,7 @@ sudo vim /etc/proxychains.conf
 将其中的 `socks4     127.0.0.1 9050` 修改成自己的socks地址。
 
 
-#### Proxychains-ng使用方法
+## Proxychains-ng使用方法
 
 在需要代理的命令前加上 proxychains4
 
@@ -190,7 +194,7 @@ proxychains4 command
 `ZSH`下可使用如下alias： `alias pc="proxychains4"` ，这样每次只需要输入`pc` ,若要使用`sudo`命令 ，请在`sudo ` 后输入`proxychains4`
 
 
-### 安装并配置Privoxy
+# 安装并配置Privoxy
 Archlinux
 ```bash
 sudo pacman -S privoxy
@@ -218,7 +222,7 @@ sudo systemctl restart privoxy.service
 sudo systemctl enable privoxy.service
 ```
 
-#### 配置浏览器
+## 配置浏览器
 
 Privoxy只能代理**HTTP**和HTTPS流量，各浏览器代理方法详见 [Starting Privoxy](http://www.privoxy.org/user-manual/startup.html) 
 
@@ -227,14 +231,14 @@ Privoxy只能代理**HTTP**和HTTPS流量，各浏览器代理方法详见 [Star
 
 
 
-### 浏览器实现PAC代理
+# 浏览器实现PAC代理
 
 安装 [SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega) ，Firefox（官方强烈建议使用Nightly版本）在[这里](https://addons.mozilla.org/en-US/firefox/addon/switchyomega/)安装该插件
 
 具体PAC配置方式可以参考 [ubuntu使用shadowsocks](https://www.sundabao.com/ubuntu%E4%BD%BF%E7%94%A8shadowsocks/)
 
 
-### 参考资料
+# 参考资料
 * [Setup and test proxychains-ng on Ubuntu 14.04](https://gist.github.com/marcinwol/b8e502eede230cc33c43)
 * [利用proxychains在终端使用socks5代理 | fazero](https://blog.fazero.me/2015/08/31/%E5%88%A9%E7%94%A8proxychains%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%BD%BF%E7%94%A8socks5%E4%BB%A3%E7%90%86/)
 * [Ubuntu 16.04编译shadowsocks-libev - 予而不语](https://heiybb.com/ubuntu-ss.hf)
