@@ -8,8 +8,6 @@ catalog: true
 tags:
     - 树莓派
 ---
- <!-- more --> 
-
 
 # 安装Python3并更换镜像源
 1. `sudo apt-get install python3-pip python3-venv`
