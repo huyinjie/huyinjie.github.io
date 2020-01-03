@@ -34,3 +34,6 @@ Temporary Items
 # debug file
 _site
 /.jekyll-cache/Jekyll/Cache
+
+# ignore all folders under /_posts
+_posts/*/
