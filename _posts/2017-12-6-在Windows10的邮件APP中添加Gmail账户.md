@@ -1,8 +1,11 @@
 ---
-title: 解决Windows10 UWP网络问题并在邮件中添加Gmail账户
-date: 2017/12/6 
-updated: 2017/12/6 
-tags: Windows
+layout:     post
+title:      解决Windows10 UWP网络问题并在邮件中添加Gmail账户
+date:       2017-12-6 20:00:00 +0800
+author:     HYJ
+header-img: img/default.jpg
+catalog: true
+tags: [Windows]
 ---
 
 由于Windows10里的UWP使用了一种叫Container的技术，使得网络代理软件的设置无法影响到UWP应用，本文讲述了突破这种限制，但对部分UWP(Facebook,Instgram等)应用无效。
@@ -18,11 +21,7 @@ Fiddler也是一种抓包工具（类似的还有Wireshark）。
 
 #### 配置Fiddler
 打开Fiddler，点击左上角WinConfig图标。勾选如下两项即可Windows10的邮件APP走网络代理。
-<!-- ![AppContainer](在Windows10的邮件APP中添加Gmail账户/Snipaste_2017-12-06_20-03-17.png) -->
-{% asset_img Snipaste_2017-12-06_20-03-17.png AppContainer %}
-
-
-
+![AppContainer](在Windows10的邮件APP中添加Gmail账户/Snipaste_2017-12-06_20-03-17.png
 #### 添加Gmail账号
 打开`邮件`➡左下角`设置图标`➡`管理账户`➡`添加账户`
 

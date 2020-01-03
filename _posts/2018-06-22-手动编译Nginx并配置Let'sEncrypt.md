@@ -5,8 +5,7 @@ date:       2018-06-22 13:43:54 +0800
 author:     HYJ
 header-img: img/default.jpg
 catalog: true
-tags:
-    - Nginx
+tags: [Nginx]
 ---
 
 

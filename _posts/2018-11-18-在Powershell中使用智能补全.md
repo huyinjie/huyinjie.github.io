@@ -1,10 +1,14 @@
 ---
-title: Using Powershell with Intellisense
-date: 2018-11-18 13:49:46
-tags:
-- windows
-- Powershell
+layout:     post
+title:      在Powershell中使用智能补全
+subtitle:   Using Powershell with Intellisense
+date:       2018-11-18 13:49:46 +0800
+author:     HYJ
+header-img: img/default.jpg
+catalog: true
+tags: [Windows, Powershell]
 ---
+
  <!-- more --> 
 
 
