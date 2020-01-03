@@ -5,8 +5,7 @@ date:       2018-03-12 20:11:18 +0800
 author:     HYJ
 header-img: img/default.jpg
 catalog: true
-tags:
-    - Proxy
+tags: [Proxy]
 ---
 
 <!-- TOC -->
