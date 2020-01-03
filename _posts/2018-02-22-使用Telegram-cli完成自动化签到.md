@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      使用Telegram-cli完成自动化签到
-date:       2018-02-22 20:00:00
+date:       2018-02-22 20:00:00 +0800
 author:     HYJ
 header-img: img/default.jpg
 catalog: true
