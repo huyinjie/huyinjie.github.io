@@ -5,8 +5,7 @@ date:       2018-02-22 20:00:00 +0800
 author:     HYJ
 header-img: img/default.jpg
 catalog: true
-tags:
-    - Linux
+tags: [Linux]
 ---
 
 
