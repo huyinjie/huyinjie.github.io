@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      手动编译Nginx并配置Let'sEncrypt
+title:      手动编译Nginx并配置Let's Encrypt
 date:       2018-06-22 13:43:54 +0800
 author:     HYJ
 header-img: img/default.jpg
