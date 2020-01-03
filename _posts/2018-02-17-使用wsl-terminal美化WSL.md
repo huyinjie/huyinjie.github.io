@@ -5,8 +5,7 @@ date:       2018-02-17 20:00:00 +0800
 author:     HYJ
 header-img: img/default.jpg
 catalog: true
-tags:
-    - WSL
+tags: [WSL, Linux]
 ---
 
 
@@ -51,7 +50,7 @@ tags:
    fi
    ```
 
-   ​
+   
 
 # 修改颜色及主题
 
