@@ -10,16 +10,16 @@ tags: [MongoDB]
 
 # 连接到MongoDB Compass
 1. 进入MongoDB Atlas控制台，点击 connect
-    ![1-1](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/1-1.png)
+    ![1-1](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/1-1.png)
 
 2. 将当前ip添加到白名单，然后点击Connect with mongoDB Compass
-    ![1-2](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/1-2.png)
+    ![1-2](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/1-2.png)
 
 3. 选择当前的MongoDB Compass版本，复制URL
-    ![1-3](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/1-3.png)
+    ![1-3](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/1-3.png)
 
 4. MongoDB Compass会自动检测剪贴板URL，补全Password，点击connect完成连接
-    ![1-4](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/1-4.png)
+    ![1-4](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/1-4.png)
 
 
 
@@ -28,18 +28,18 @@ tags: [MongoDB]
 
 
 1. 打开Robo 3T，点击Manage Connections --> Create
-    ![2-1](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-1.png)
+    ![2-1](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/2-1.png)
 
 2. 进入MongoDB Atlas控制台，将IP白名单设置为**ALLOW ACCESS FROM ANYWHERE** ；点击当前实例名，复制集群中PRIMARY的Address，将其复制进Robo 3T
-    ![2-2-1](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-2-1.png)
-    ![2-2-2](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-2-2.png)
-    ![2-2-3](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-2-3.png)
+    ![2-2-1](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/2-2-1.png)
+    ![2-2-2](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/2-2-2.png)
+    ![2-2-3](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/2-2-3.png)
 
 3. 点击 `Authentication` 标签, 将 `Database` 设置为 ` admin` 并填入 `User Name`  和  `Password` , `Auth Mechanism` 设置为 `SCRAM-SHA-1` 。
-    ![2-3](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-3.png)
+    ![2-3](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/2-3.png)
 
 4.  将 `Authentication Method` 设置为 `Select self-signed Certificate` 。
-    ![2-4](https://huyinjiexyz-1251543717.cos.ap-shanghai.myqcloud.com/source/_posts/可视化管理MongoDB-Atlas/2-4.png)
+    ![2-4](https://myblog-1251543717.cos.ap-shanghai.myqcloud.com/_posts/2018-05-05-可视化管理MongoDB-Atlas/2-4.png)
 
 
 # 参考资料
